@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UniFatecie – Polo Mongaguá</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #f5f5f5; color: #1f2937; min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── PÁGINAS ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── HEADER ── */
+    header {
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .header-inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .logo { cursor: pointer; }
+    .logo h1 { font-size: 1.7rem; font-weight: 900; color: #f58220; line-height: 1; }
+    .logo p  { font-size: .72rem; color: #6b7280; font-weight: 600; }
+    nav { display: flex; gap: 28px; font-weight: 500; font-size: .95rem; }
+    nav a { cursor: pointer; transition: color .2s; }
+    nav a:hover { color: #f58220; }
+    .header-btns { display: flex; gap: 10px; }
+    .btn-ig {
+      background: linear-gradient(to right,#ec4899,#f97316);
+      color:#fff; padding:9px 18px; border-radius:10px;
+      font-weight:600; font-size:.85rem; transition:transform .2s;
+    }
+    .btn-ig:hover { transform:scale(1.05); }
+    .btn-wa-h {
+      background:#f58220; color:#fff;
+      padding:9px 18px; border-radius:10px;
+      font-weight:600; font-size:.85rem; transition:background .2s;
+    }
+    .btn-wa-h:hover { background:#ea7009; }
+
+    /* ── HERO HOME ── */
+    #sec-hero {
+      background: linear-gradient(135deg,#f58220,#f97316);
+      color:#fff; overflow:hidden;
+    }
+    .hero-inner {
+      max-width:1280px; margin:0 auto;
+      padding:88px 24px;
+      display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;
+    }
+    .hero-inner h2 { font-size:2.8rem; font-weight:900; line-height:1.2; margin-bottom:20px; }
+    .hero-inner > div > p { font-size:1.15rem; color:#ffedd5; margin-bottom:28px; line-height:1.7; }
+    .hero-btns { display:flex; flex-wrap:wrap; gap:14px; }
+    .btn-hw { background:#fff; color:#f58220; padding:13px 22px; border-radius:14px; font-weight:700; font-size:.95rem; box-shadow:0 4px 12px rgba(0,0,0,.15); transition:transform .2s; cursor:pointer; border:none; }
+    .btn-hw:hover { transform:scale(1.05); }
+    .btn-ho { border:2px solid #fff; color:#fff; padding:13px 22px; border-radius:14px; font-weight:700; font-size:.95rem; background:transparent; transition:background .2s,color .2s; cursor:pointer; }
+    .btn-ho:hover { background:#fff; color:#f58220; }
+    .hero-card { background:rgba(255,255,255,.12); backdrop-filter:blur(12px); border-radius:22px; padding:28px; box-shadow:0 20px 40px rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.2); }
+    .hero-card-inner { background:#fff; border-radius:16px; padding:28px; color:#1f2937; }
+    .hero-card-inner h3 { font-size:2.2rem; font-weight:900; color:#f58220; margin-bottom:10px; }
+    .hero-card-inner p { font-size:1rem; line-height:1.7; }
+
+    /* ── SOBRE ── */
+    #sec-sobre { max-width:1280px; margin:0 auto; padding:88px 24px; }
+    .sobre-grid { display:grid; grid-template-columns:1fr 1fr; gap:52px; align-items:center; }
+    .sobre-grid h2 { font-size:2.3rem; font-weight:700; margin-bottom:20px; }
+    .sobre-grid p  { font-size:1.05rem; color:#4b5563; line-height:1.8; margin-bottom:16px; }
+    .sobre-cards { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .sobre-card { background:#fff; padding:24px; border-radius:20px; box-shadow:0 4px 16px rgba(0,0,0,.07); }
+    .sobre-card h3 { font-size:2.2rem; font-weight:900; color:#f58220; margin-bottom:6px; }
+    .sobre-card p  { color:#6b7280; font-size:.9rem; }
+    .sobre-card.wide { grid-column:span 2; }
+    .sobre-card.wide h3 { font-size:1.2rem; font-weight:700; margin-bottom:8px; }
+
+    /* ── CURSOS GRID ── */
+    #sec-cursos { background:#fff; padding:88px 0; }
+    .cursos-inner { max-width:1280px; margin:0 auto; padding:0 24px; }
+    .sec-title { text-align:center; margin-bottom:56px; }
+    .sec-title h2 { font-size:2.6rem; font-weight:700; margin-bottom:10px; }
+    .sec-title p  { color:#6b7280; font-size:1.05rem; }
+    .cursos-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .curso-card {
+      background:#f5f5f5; border-radius:22px; padding:28px;
+      box-shadow:0 4px 16px rgba(0,0,0,.06);
+      transition:background .3s,color .3s,transform .3s;
+      cursor:pointer; border:none; text-align:left; width:100%;
+      display:block;
+    }
+    .curso-card:hover { background:#f58220; color:#fff; transform:translateY(-6px); }
+    .curso-card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+    .curso-icon { font-size:2.6rem; }
+    .curso-badge { background:#fff; color:#f58220; padding:5px 12px; border-radius:8px; font-weight:700; font-size:.75rem; }
+    .curso-card h3 { font-size:1.5rem; font-weight:700; margin-bottom:10px; }
+    .curso-info { font-size:.95rem; opacity:.8; line-height:1.9; }
+    .curso-btn { display:inline-block; margin-top:20px; background:#fff; color:#f58220; padding:9px 20px; border-radius:9px; font-weight:700; font-size:.9rem; box-shadow:0 3px 8px rgba(0,0,0,.1); }
+
+    /* ── DIFERENCIAIS ── */
+    #sec-dif { max-width:1280px; margin:0 auto; padding:88px 24px; }
+    .dif-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    .dif-card { background:#fff; border-radius:22px; padding:32px; box-shadow:0 6px 20px rgba(0,0,0,.07); }
+    .dif-card .dif-icon { font-size:2.6rem; margin-bottom:16px; }
+    .dif-card h3 { font-size:1.2rem; font-weight:700; margin-bottom:10px; }
+    .dif-card p  { color:#4b5563; line-height:1.7; font-size:.95rem; }
+
+    /* ── CONTATO ── */
+    #sec-contato { background:#2e2e2e; color:#fff; padding:88px 0; }
+    .contato-inner { max-width:1280px; margin:0 auto; padding:0 24px; display:grid; grid-template-columns:1fr 1fr; gap:52px; align-items:start; }
+    #sec-contato h2 { font-size:2.6rem; font-weight:700; margin-bottom:24px; }
+    .contato-info { font-size:1.05rem; line-height:2.5; }
+    .contato-info span { color:#f58220; font-weight:700; }
+    .btn-wa-c { display:inline-block; margin-top:28px; background:#f58220; color:#fff; padding:13px 26px; border-radius:14px; font-weight:700; font-size:1rem; transition:background .2s; }
+    .btn-wa-c:hover { background:#ea7009; }
+    .form-card { background:#fff; border-radius:22px; padding:28px; color:#1f2937; box-shadow:0 8px 32px rgba(0,0,0,.2); }
+    .form-card h3 { font-size:1.5rem; font-weight:700; margin-bottom:16px; }
+    .form-card input,.form-card textarea { display:block; width:100%; border:1px solid #d1d5db; border-radius:10px; padding:12px; font-size:.95rem; font-family:inherit; margin-bottom:12px; outline:none; transition:border .2s; }
+    .form-card input:focus,.form-card textarea:focus { border-color:#f58220; }
+    .form-card textarea { resize:vertical; }
+    .btn-submit { width:100%; background:#f58220; color:#fff; padding:13px; border-radius:10px; font-weight:700; font-size:1rem; border:none; cursor:pointer; transition:background .2s; }
+    .btn-submit:hover { background:#ea7009; }
+
+    /* ── PÁGINA CURSO (DETALHE) ── */
+    .curso-hero-banner {
+      position:relative; overflow:hidden; min-height:260px;
+      display:flex; align-items:flex-end;
+    }
+    .chb-bg { position:absolute; inset:0; }
+    .chb-overlay { position:absolute; inset:0; background:linear-gradient(to right,rgba(245,130,32,.88) 0%,rgba(249,115,22,.55) 55%,transparent 100%); }
+    .chb-content { position:relative; z-index:2; max-width:1280px; width:100%; margin:0 auto; padding:44px 24px 36px; }
+    .breadcrumb { display:flex; align-items:center; gap:8px; font-size:.78rem; color:rgba(255,255,255,.7); margin-bottom:14px; }
+    .breadcrumb a { color:rgba(255,255,255,.7); cursor:pointer; transition:color .2s; }
+    .breadcrumb a:hover { color:#fff; }
+    .breadcrumb span { color:rgba(255,255,255,.35); }
+    .chb-badge { display:inline-block; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); color:#fff; font-size:.72rem; font-weight:700; padding:3px 12px; border-radius:999px; letter-spacing:.06em; text-transform:uppercase; margin-bottom:10px; }
+    .chb-content h1 { font-size:2.6rem; font-weight:900; color:#fff; line-height:1.15; margin-bottom:10px; }
+    .chb-content > p { font-size:1rem; color:rgba(255,255,255,.8); max-width:560px; line-height:1.6; }
+
+    .curso-body { max-width:1280px; margin:0 auto; padding:44px 24px 80px; display:grid; grid-template-columns:1fr 320px; gap:36px; align-items:start; }
+
+    .curso-img-wrap { border-radius:18px; overflow:hidden; box-shadow:0 8px 28px rgba(0,0,0,.14); margin-bottom:28px; min-height:160px; display:flex; align-items:center; justify-content:center; font-size:5rem; }
+    .curso-desc { font-size:1rem; color:#4b5563; line-height:1.85; margin-bottom:12px; }
+    .curso-desc strong { color:#1f2937; }
+
+    .cbox { background:#fff; border-radius:18px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,.07); border:1px solid #f0f0f0; margin-bottom:20px; }
+    .cbox h3 { font-size:1.25rem; font-weight:800; color:#f58220; margin-bottom:14px; padding-bottom:10px; border-bottom:2px solid #fff7ed; }
+    .cbox p  { font-size:.95rem; color:#4b5563; line-height:1.8; margin-bottom:8px; }
+    .dif-ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
+    .dif-ul li { display:flex; align-items:flex-start; gap:9px; font-size:.92rem; color:#374151; line-height:1.6; }
+    .dif-ul li::before { content:'✦'; color:#f58220; font-size:.7rem; margin-top:4px; flex-shrink:0; }
+
+    .mh { display:flex; justify-content:space-between; font-size:.72rem; font-weight:700; color:#9ca3af; text-transform:uppercase; letter-spacing:.05em; padding-bottom:9px; border-bottom:2px solid #f3f4f6; margin-bottom:2px; }
+    .mr { display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid #f3f4f6; font-size:.87rem; color:#374151; gap:14px; }
+    .mr:last-child { border-bottom:none; }
+    .mr span { flex:1; line-height:1.5; }
+    .mr strong { white-space:nowrap; color:#f58220; font-weight:700; font-size:.87rem; background:#fff7ed; padding:2px 9px; border-radius:6px; }
+    .mn { margin-top:16px; font-size:.8rem; color:#9ca3af; font-style:italic; line-height:1.6; background:#f9fafb; padding:11px 14px; border-radius:9px; }
+
+    /* SIDEBAR CURSO */
+    .sidebar { position:sticky; top:84px; }
+    .scard { background:#fff; border-radius:18px; padding:24px; box-shadow:0 4px 22px rgba(0,0,0,.09); border:1px solid #f0f0f0; margin-bottom:18px; }
+    .scard h3 { font-size:1.1rem; font-weight:700; margin-bottom:16px; text-align:center; padding-bottom:13px; border-bottom:1px solid #f3f4f6; }
+    .ir { margin-bottom:14px; display:flex; align-items:center; gap:9px; }
+    .ir-ico { font-size:1rem; }
+    .ir div p { font-size:.72rem; color:#9ca3af; font-weight:600; text-transform:uppercase; letter-spacing:.04em; }
+    .ir div strong { font-size:.9rem; font-weight:700; }
+    .pb { text-align:center; margin:16px 0 20px; }
+    .pb .po { font-size:.9rem; color:#9ca3af; text-decoration:line-through; }
+    .pb .pn { font-size:2.2rem; font-weight:900; color:#f58220; line-height:1.1; }
+    .pb .pp { font-size:.8rem; color:#6b7280; margin-top:3px; }
+    .btn-mat { display:block; width:100%; text-align:center; background:#f58220; color:#fff; padding:13px; border-radius:12px; font-weight:800; font-size:.95rem; box-shadow:0 4px 12px rgba(245,130,32,.33); transition:background .2s,transform .2s; margin-bottom:9px; cursor:pointer; border:none; }
+    .btn-mat:hover { background:#ea7009; transform:translateY(-1px); }
+    .btn-inf { display:block; width:100%; text-align:center; background:#f3f4f6; color:#374151; padding:12px; border-radius:12px; font-weight:700; font-size:.9rem; transition:background .2s; border:none; cursor:pointer; }
+    .btn-inf:hover { background:#e5e7eb; }
+    .oc h4 { font-size:.82rem; font-weight:700; color:#6b7280; margin-bottom:10px; text-transform:uppercase; letter-spacing:.05em; }
+    .ocl { display:flex; align-items:center; justify-content:space-between; padding:9px 12px; border-radius:9px; background:#f9fafb; border:1px solid #f3f4f6; margin-bottom:7px; font-size:.87rem; font-weight:600; transition:background .2s,border-color .2s; cursor:pointer; width:100%; text-align:left; }
+    .ocl:hover { background:#fff7ed; border-color:#fed7aa; color:#f58220; }
+    .ocl span { font-size:.72rem; color:#9ca3af; }
+
+    /* ── MATRÍCULA ── */
+    .mat-banner { background:linear-gradient(135deg,#f58220,#f97316); color:#fff; padding:52px 24px 44px; text-align:center; }
+    .mat-banner .badge { display:inline-block; background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.35); color:#fff; font-size:.75rem; font-weight:700; padding:3px 13px; border-radius:999px; letter-spacing:.06em; text-transform:uppercase; margin-bottom:16px; }
+    .mat-banner h1 { font-size:2.4rem; font-weight:900; margin-bottom:10px; }
+    .mat-banner p  { font-size:1.05rem; color:#ffedd5; max-width:500px; margin:0 auto; line-height:1.6; }
+    .mat-strip { background:#fff; border-bottom:1px solid #e5e7eb; }
+    .mat-strip-inner { max-width:900px; margin:0 auto; padding:18px 24px; display:flex; flex-wrap:wrap; gap:22px; align-items:center; }
+    .msi { display:flex; flex-direction:column; gap:2px; }
+    .msi span { font-size:.72rem; color:#9ca3af; font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
+    .msi strong { font-size:.95rem; font-weight:700; }
+    .msi-price { margin-left:auto; text-align:right; }
+    .msi-price .po { font-size:.85rem; color:#9ca3af; text-decoration:line-through; }
+    .msi-price .pn { font-size:1.5rem; font-weight:900; color:#f58220; }
+    .msi-price .pp { font-size:.75rem; color:#6b7280; }
+    .mat-body { max-width:900px; margin:0 auto; padding:44px 24px 80px; }
+    .steps-title,.contato-title { font-size:1.25rem; font-weight:700; margin-bottom:22px; display:flex; align-items:center; gap:10px; }
+    .steps-title::after { content:''; flex:1; height:2px; background:linear-gradient(to right,#f58220,transparent); border-radius:2px; }
+    .contato-title::after { content:''; flex:1; height:2px; background:linear-gradient(to right,#22c55e,transparent); border-radius:2px; }
+    .steps { display:flex; flex-direction:column; gap:14px; margin-bottom:40px; }
+    .step { background:#fff; border-radius:14px; padding:18px 20px; display:flex; align-items:flex-start; gap:14px; box-shadow:0 2px 8px rgba(0,0,0,.05); border:1px solid #f3f4f6; }
+    .step-num { min-width:34px; height:34px; background:#fff7ed; border:2px solid #f58220; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.9rem; color:#f58220; }
+    .step-body h4 { font-size:.95rem; font-weight:700; margin-bottom:3px; }
+    .step-body p  { font-size:.87rem; color:#6b7280; line-height:1.6; }
+    .mat-cards { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:36px; }
+    .card-wa-main { grid-column:span 2; background:linear-gradient(135deg,#22c55e,#16a34a); border-radius:20px; padding:28px; color:#fff; display:flex; align-items:center; justify-content:space-between; gap:20px; box-shadow:0 6px 28px rgba(34,197,94,.32); }
+    .card-wa-main .wi { font-size:3rem; }
+    .card-wa-main .wt h3 { font-size:1.35rem; font-weight:800; margin-bottom:5px; }
+    .card-wa-main .wt p  { font-size:.93rem; color:rgba(255,255,255,.85); margin-bottom:3px; }
+    .card-wa-main .wt .num { font-size:1.1rem; font-weight:700; }
+    .card-wa-main .wb { background:#fff; color:#16a34a; padding:12px 24px; border-radius:12px; font-weight:800; font-size:.95rem; white-space:nowrap; transition:transform .2s,box-shadow .2s; box-shadow:0 3px 12px rgba(0,0,0,.13); }
+    .card-wa-main .wb:hover { transform:scale(1.05); }
+    .card-msg { background:#fff; border-radius:18px; padding:24px; box-shadow:0 2px 10px rgba(0,0,0,.06); border:1px solid #e5e7eb; }
+    .card-msg h4 { font-size:.95rem; font-weight:700; margin-bottom:7px; display:flex; align-items:center; gap:7px; }
+    .card-msg p  { font-size:.85rem; color:#6b7280; line-height:1.6; margin-bottom:13px; }
+    .msg-preview { background:#f0fdf4; border:1px solid #bbf7d0; border-radius:9px; padding:12px; font-size:.83rem; color:#15803d; line-height:1.7; margin-bottom:13px; font-family:monospace; }
+    .btn-copy,.btn-send { display:block; width:100%; text-align:center; padding:9px; border-radius:9px; font-weight:700; font-size:.87rem; border:none; cursor:pointer; transition:background .2s; margin-bottom:7px; }
+    .btn-copy { background:#f3f4f6; color:#374151; }
+    .btn-copy:hover { background:#e5e7eb; }
+    .btn-send { background:#22c55e; color:#fff; }
+    .btn-send:hover { background:#16a34a; }
+    .copy-ok { font-size:.78rem; color:#16a34a; text-align:center; margin-top:3px; display:none; }
+    .card-horario { background:#fff7ed; border:1px solid #fed7aa; border-radius:18px; padding:24px; }
+    .card-horario h4 { font-size:.95rem; font-weight:700; margin-bottom:14px; color:#92400e; display:flex; align-items:center; gap:7px; }
+    .hr-row { display:flex; align-items:center; justify-content:space-between; padding:9px 0; border-bottom:1px solid #fde8c8; font-size:.87rem; }
+    .hr-row:last-child { border-bottom:none; }
+    .hr-row .dia { font-weight:600; }
+    .hr-row .hora { color:#f58220; font-weight:700; }
+    .status-on  { background:#dcfce7; color:#16a34a; font-size:.72rem; font-weight:700; padding:2px 9px; border-radius:999px; }
+    .status-off { background:#f3f4f6; color:#9ca3af; font-size:.72rem; font-weight:700; padding:2px 9px; border-radius:999px; }
+    .aviso { background:#fffbeb; border:1px solid #fde68a; border-radius:12px; padding:15px 18px; display:flex; align-items:flex-start; gap:10px; font-size:.88rem; color:#92400e; line-height:1.6; }
+
+    /* ── FOOTER / FLOAT ── */
+    footer { background:#000; color:#9ca3af; text-align:center; padding:22px; font-size:.82rem; }
+    .wa-float { position:fixed; bottom:22px; right:22px; background:#22c55e; color:#fff; padding:12px 20px; border-radius:999px; font-weight:700; font-size:.92rem; box-shadow:0 6px 20px rgba(34,197,94,.4); z-index:200; transition:background .2s; }
+    .wa-float:hover { background:#16a34a; }
+
+
+    /* ── OPÇÕES MATRÍCULA ── */
+    .mat-opcoes{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      margin-top:28px;
+    }
+
+    .opcao-card{
+      background:#fff;
+      border-radius:22px;
+      padding:32px;
+      box-shadow:0 6px 24px rgba(0,0,0,.08);
+      border:1px solid #f3f4f6;
+    }
+
+    .opcao-icon{
+      font-size:3rem;
+      margin-bottom:16px;
+    }
+
+    .opcao-card h3{
+      font-size:1.4rem;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    .opcao-card p{
+      color:#6b7280;
+      line-height:1.7;
+      margin-bottom:22px;
+    }
+
+    .btn-opcao-wa{
+      display:inline-block;
+      background:#22c55e;
+      color:#fff;
+      padding:14px 24px;
+      border-radius:12px;
+      font-weight:700;
+      transition:.2s;
+    }
+
+    .btn-opcao-wa:hover{
+      background:#16a34a;
+    }
+
+    .form-card-matricula input{
+      width:100%;
+      padding:13px;
+      border:1px solid #d1d5db;
+      border-radius:10px;
+      margin-bottom:12px;
+      font-size:.95rem;
+      outline:none;
+    }
+
+    .form-card-matricula input:focus{
+      border-color:#f58220;
+    }
+
+    .btn-enviar-form{
+      width:100%;
+      background:#f58220;
+      color:#fff;
+      border:none;
+      padding:14px;
+      border-radius:12px;
+      font-weight:700;
+      font-size:1rem;
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    .btn-enviar-form:hover{
+      background:#ea7009;
+    }
+
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .mat-opcoes{
+        grid-template-columns:1fr;
+      }
+
+      nav,.btn-ig { display:none; }
+      .hero-inner,.sobre-grid,.contato-inner,.curso-body { grid-template-columns:1fr; }
+      .hero-inner h2 { font-size:2rem; }
+      .cursos-grid,.dif-grid { grid-template-columns:1fr; }
+      .sidebar { position:static; }
+      .sobre-card.wide { grid-column:span 1; }
+      .mat-cards { grid-template-columns:1fr; }
+      .card-wa-main { grid-column:span 1; flex-direction:column; text-align:center; }
+      .card-wa-main .wb { width:100%; text-align:center; }
+      .msi-price { margin-left:0; }
+      .chb-content h1 { font-size:1.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <div class="logo" onclick="showPage('home')">
+      <h1>UniFatecie</h1>
+      <p>Polo Mongaguá</p>
+    </div>
+    <nav>
+      <a onclick="showPage('home')">Início</a>
+      <a onclick="showPage('home');scrollTo('sec-sobre')">Sobre</a>
+      <a onclick="showPage('cursos')">Cursos</a>
+      <a onclick="showPage('home');scrollTo('sec-contato')">Contato</a>
+    </nav>
+    <div class="header-btns">
+      <a href="https://instagram.com/unifatecie_mongagua" target="_blank" class="btn-ig">Instagram</a>
+      <a href="https://wa.me/5513991568811" target="_blank" class="btn-wa-h">WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════
+     PAGE: HOME
+════════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section id="sec-hero">
+    <div class="hero-inner">
+      <div>
+        <h2>Graduação EAD com qualidade e flexibilidade</h2>
+        <p>O UniFatecie Polo Mongaguá oferece cursos EAD e semipresenciais com ensino moderno, suporte ao aluno e metodologia focada no mercado de trabalho.</p>
+        <div class="hero-btns">
+          <button class="btn-hw" onclick="showPage('cursos')">Ver Cursos</button>
+          <button class="btn-ho" onclick="window.open('https://wa.me/5513991568811','_blank')">Fale Conosco</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <h3>ATÉ 70% OFF</h3>
+          <p>Faça sua graduação com condições especiais e tenha acesso a um ensino reconhecido, moderno e acessível.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sec-sobre">
+    <div class="sobre-grid">
+      <div>
+        <h2>Sobre o Polo Mongaguá</h2>
+        <p>O UniFatecie Polo Mongaguá oferece ensino superior com foco em qualidade, flexibilidade e inovação. Os alunos contam com uma plataforma moderna, suporte acadêmico e cursos voltados para o mercado de trabalho.</p>
+        <p>A metodologia EAD permite estudar no seu ritmo, conciliando estudos, trabalho e vida pessoal com praticidade.</p>
+      </div>
+      <div class="sobre-cards">
+        <div class="sobre-card"><h3>EAD</h3><p>Ensino flexível com qualidade reconhecida.</p></div>
+        <div class="sobre-card"><h3>+</h3><p>Cursos modernos e suporte ao aluno.</p></div>
+        <div class="sobre-card wide"><h3>Formas de Ingresso</h3><p style="color:#4b5563;font-size:.9rem;">Entre em contato para conhecer todas as formas de ingresso disponíveis.</p></div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- DIFERENCIAIS -->
+  <section id="sec-dif">
+    <div class="sec-title">
+      <h2>Por que estudar conosco?</h2>
+      <p>Ensino pensado para transformar seu futuro.</p>
+    </div>
+    <div class="dif-grid">
+      <div class="dif-card"><div class="dif-icon">📚</div><h3>Ensino Moderno</h3><p>Plataforma atualizada e metodologia inovadora.</p></div>
+      <div class="dif-card"><div class="dif-icon">💻</div><h3>Flexibilidade</h3><p>Estude de onde quiser e no seu ritmo.</p></div>
+      <div class="dif-card"><div class="dif-icon">🏆</div><h3>Qualidade</h3><p>Cursos reconhecidos e voltados ao mercado.</p></div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="sec-contato">
+    <div class="contato-inner">
+      <div>
+        <h2>Entre em contato</h2>
+        <div class="contato-info">
+          <p><span>WhatsApp:</span> (13) 99156-8811</p>
+          <p><span>Atendimento:</span> Quarta-feira das 14h às 18h</p>
+          <p><span>Local:</span> Mongaguá – SP</p>
+        </div>
+        <a href="https://wa.me/5513991568811" target="_blank" class="btn-wa-c">Chamar no WhatsApp</a>
+      </div>
+      <div class="form-card">
+        <h3>Solicite informações</h3>
+        <input type="text" placeholder="Seu nome"/>
+        <input type="email" placeholder="Seu e-mail"/>
+        <textarea placeholder="Mensagem" rows="5"></textarea>
+        <button class="btn-submit" onclick="window.open('https://wa.me/5513991568811','_blank')">Enviar</button>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-home -->
+
+
+
+<!-- ════════════════════════════════════════════
+     PAGE: CURSOS
+════════════════════════════════════════════ -->
+<div id="page-cursos" class="page">
+
+  <section id="sec-cursos">
+    <div class="cursos-inner">
+      <div class="sec-title">
+        <h2>Nossos Cursos</h2>
+        <p>Escolha um curso para visualizar informações completas.</p>
+      </div>
+      <div class="cursos-grid">
+
+        <div class="curso-card" onclick="showPage('ef')">
+          <div class="curso-card-top">
+            <div class="curso-icon">🏃</div>
+            <div class="curso-badge">Graduação EAD</div>
+          </div>
+          <h3>Educação Física – Licenciatura</h3>
+          <div class="curso-info"><p>Duração: 4 anos</p><p>R$ 112,20/mês</p></div>
+          <div class="curso-btn">Ver Curso →</div>
+        </div>
+
+        <div class="curso-card" onclick="showPage('mat')">
+          <div class="curso-card-top">
+            <div class="curso-icon">📐</div>
+            <div class="curso-badge">Graduação EAD</div>
+          </div>
+          <h3>Matemática – Licenciatura</h3>
+          <div class="curso-info"><p>Duração: 4 anos</p><p>R$ 112,20/mês</p></div>
+          <div class="curso-btn">Ver Curso →</div>
+        </div>
+
+        <div class="curso-card" onclick="showPage('home');scrollTo('sec-contato')">
+          <div class="curso-card-top">
+            <div class="curso-icon">📊</div>
+            <div class="curso-badge">Graduação EAD</div>
+          </div>
+          <h3>Administração</h3>
+          <div class="curso-info"><p>Duração: 4 anos</p><p>Consulte valores</p></div>
+          <div class="curso-btn">Consultar →</div>
+        </div>
+
+        <div class="curso-card" onclick="showPage('home');scrollTo('sec-contato')">
+          <div class="curso-card-top">
+            <div class="curso-icon">💻</div>
+            <div class="curso-badge">Graduação EAD</div>
+          </div>
+          <h3>ADS – Análise e Desenvolvimento de Sistemas</h3>
+          <div class="curso-info"><p>Duração: 2,5 anos</p><p>Consulte valores</p></div>
+          <div class="curso-btn">Consultar →</div>
+        </div>
+
+        
+        <div class="curso-card" onclick="showPage('artes')">
+          <div class="curso-card-top">
+            <div class="curso-icon">🎨</div>
+            <div class="curso-badge">Graduação EAD</div>
+          </div>
+          <h3>Artes – Licenciatura</h3>
+          <div class="curso-info"><p>Duração: 4 anos</p><p>R$ 112,20/mês</p></div>
+          <div class="curso-btn">Ver Curso →</div>
+        </div>
+
+        <div class="curso-card" onclick="showPage('biomed')">
+          <div class="curso-card-top">
+            <div class="curso-icon">🧬</div>
+            <div class="curso-badge">Graduação EAD</div>
+          </div>
+          <h3>Biomedicina – Bacharelado</h3>
+          <div class="curso-info"><p>Duração: 4 anos</p><p>R$ 292,06/mês</p></div>
+          <div class="curso-btn">Ver Curso →</div>
+        </div>
+
+        <div class="curso-card" onclick="showPage('home');scrollTo('sec-contato')" style="grid-column:span 2">
+          <div class="curso-card-top">
+            <div class="curso-icon">⚙️</div>
+            <div class="curso-badge">Graduação EAD</div>
+          </div>
+          <h3>Engenharia</h3>
+          <div class="curso-info"><p>Duração: 5 anos</p><p>Consulte valores</p></div>
+          <div class="curso-btn">Consultar →</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-cursos -->
+
+
+<!-- ════════════════════════════════════════════
+     PAGE: EDUCAÇÃO FÍSICA
+════════════════════════════════════════════ -->
+<div id="page-ef" class="page">
+
+  <div class="curso-hero-banner">
+    <div class="chb-bg" style="background:linear-gradient(135deg,#1c3a1c,#166534)"></div>
+    <div class="chb-overlay"></div>
+    <div class="chb-content">
+      <div class="breadcrumb">
+        <a onclick="showPage('home')">Início</a><span>›</span>
+        <a onclick="showPage('cursos')">Cursos</a><span>›</span>
+        <span style="color:#fff">Educação Física</span>
+      </div>
+      <div class="chb-badge">Graduação EAD</div>
+      <h1>Educação Física<br>Licenciatura</h1>
+      <p>Torne-se professor com formação completa, teórica e prática, voltada ao mercado.</p>
+    </div>
+  </div>
+
+  <div class="curso-body">
+    <!-- CONTEÚDO -->
+    <div>
+      <div class="curso-img-wrap" style="background:linear-gradient(135deg,#14532d,#166534)">🏃</div>
+
+      <p class="curso-desc">O curso <strong>Semipresencial</strong> oferece formação teórica e prática alinhada ao mercado, unindo flexibilidade do EAD à interação presencial. As disciplinas são realizadas no ambiente virtual de aprendizagem, com aulas gravadas, materiais de apoio e encontros ao vivo para debates e aprofundamento.</p>
+      <p class="curso-desc" style="margin-bottom:28px;"><strong>A metodologia utiliza estratégias ativas</strong>, integrando momentos online e presenciais, com tutoria e acompanhamento individual.</p>
+
+      <div class="cbox">
+        <h3>🏢 Mercado de Trabalho</h3>
+        <p>O profissional com habilitação em Licenciatura em Educação Física está apto a atuar como Professor de Educação Física da Educação Básica, podendo atuar na área do Ensino Fundamental, Médio e na Educação Infantil.</p>
+      </div>
+
+      <div class="cbox">
+        <h3>⭐ Diferenciais Competitivos</h3>
+        <ul class="dif-ul">
+          <li>Formar educadores físicos íntegros e comprometidos com a transformação da comunidade.</li>
+          <li>Capacitar o profissional para uma visão crítica e criativa da educação, interagindo com equipes inter e multidisciplinares.</li>
+          <li>Desenvolver habilidades pedagógicas inclusivas e modernas.</li>
+          <li>Executar atividades com embasamento científico e metodológico atualizado.</li>
+          <li>Contribuir com o desenvolvimento motor, cognitivo e social dos alunos.</li>
+        </ul>
+      </div>
+
+      <div class="cbox">
+        <h3>📋 Matriz Curricular</h3>
+        <div class="mh"><span>Disciplina</span><span>Carga</span></div>
+        <div class="mr"><span>INTEGRAÇÃO MULTIPROFISSIONAL E CIDADANIA EM SAÚDE – FUNDAMENTOS DO CUIDADO INTEGRAL</span><strong>10h</strong></div>
+        <div class="mr"><span>FORMAÇÃO SOCIOCULTURAL E SUSTENTÁVEL</span><strong>30h</strong></div>
+        <div class="mr"><span>COMUNICAÇÃO E EXPRESSÃO</span><strong>35h</strong></div>
+        <div class="mr"><span>INTRODUÇÃO AO CURSO DE EDUCAÇÃO FÍSICA – LICENCIATURA</span><strong>30h</strong></div>
+        <div class="mr"><span>ANATOMIA HUMANA BÁSICA</span><strong>35h</strong></div>
+        <div class="mr"><span>BASES BIOLÓGICAS</span><strong>35h</strong></div>
+        <div class="mr"><span>SAÚDE COLETIVA E PROMOÇÃO DA SAÚDE</span><strong>35h</strong></div>
+        <div class="mr"><span>GINÁSTICA</span><strong>35h</strong></div>
+        <div class="mr"><span>HISTÓRIA DA EDUCAÇÃO FÍSICA</span><strong>35h</strong></div>
+        <div class="mr"><span>FISIOLOGIA HUMANA</span><strong>35h</strong></div>
+        <div class="mr"><span>PSICOLOGIA DO ESPORTE</span><strong>35h</strong></div>
+        <div class="mr"><span>LAZER E RECREAÇÃO</span><strong>35h</strong></div>
+        <div class="mr"><span>ATLETISMO</span><strong>35h</strong></div>
+        <div class="mr"><span>ESTUDOS DE RÍTMICA E DANÇA</span><strong>35h</strong></div>
+        <div class="mr"><span>ESPORTES AQUÁTICOS</span><strong>35h</strong></div>
+        <p class="mn">"A matriz curricular pode ser alterada a qualquer momento para atender a atualizações acadêmicas ou exigências legais."</p>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="scard">
+        <h3>Informações do Curso</h3>
+        <div class="ir"><span class="ir-ico">🎓</span><div><p>Habilitação</p><strong>Licenciatura</strong></div></div>
+        <div class="ir"><span class="ir-ico">⭐</span><div><p>Modalidade</p><strong>Graduação EAD</strong></div></div>
+        <div class="ir"><span class="ir-ico">📅</span><div><p>Duração</p><strong>4 Anos</strong></div></div>
+        <div class="pb">
+          <p class="po">De R$ 330,00</p>
+          <p class="pn">R$ 112,20</p>
+          <p class="pp">/ mês</p>
+        </div>
+        <button class="btn-mat" onclick="showPage('matricula','ef')">Fazer matrícula ✓</button>
+        <button class="btn-inf" onclick="window.open('https://wa.me/5513991568811?text=Ol%C3%A1!%20Quero%20informa%C3%A7%C3%B5es%20sobre%20Educa%C3%A7%C3%A3o%20F%C3%ADsica%20Licenciatura.','_blank')">Quero Mais Informações</button>
+      </div>
+      <div class="scard oc">
+        <h4>Outros cursos</h4>
+        <button class="ocl" onclick="showPage('mat')">Matemática <span>Licenciatura</span></button>
+        <button class="ocl" onclick="showPage('home');scrollTo('sec-contato')">Administração <span>EAD</span></button>
+        <button class="ocl" onclick="showPage('home');scrollTo('sec-contato')">ADS <span>EAD</span></button>
+        <button class="ocl" onclick="showPage('home');scrollTo('sec-contato')">Engenharia <span>EAD</span></button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-ef -->
+
+
+<!-- ════════════════════════════════════════════
+     PAGE: MATEMÁTICA
+════════════════════════════════════════════ -->
+<div id="page-mat" class="page">
+
+  <div class="curso-hero-banner">
+    <div class="chb-bg" style="background:linear-gradient(135deg,#1a1a2e,#0f3460)"></div>
+    <div class="chb-overlay"></div>
+    <div class="chb-content">
+      <div class="breadcrumb">
+        <a onclick="showPage('home')">Início</a><span>›</span>
+        <a onclick="showPage('cursos')">Cursos</a><span>›</span>
+        <span style="color:#fff">Matemática</span>
+      </div>
+      <div class="chb-badge">Graduação EAD</div>
+      <h1>Matemática<br>Licenciatura</h1>
+      <p>Forme-se professor com domínio completo da Matemática e metodologias modernas de ensino.</p>
+    </div>
+  </div>
+
+  <div class="curso-body">
+    <!-- CONTEÚDO -->
+    <div>
+      <div class="curso-img-wrap" style="background:linear-gradient(135deg,#1a1a2e,#0f3460)">📐</div>
+
+      <p class="curso-desc">O curso <strong>Semipresencial</strong> oferece formação teórica e prática alinhada ao mercado, unindo flexibilidade do EAD à interação presencial. As disciplinas são realizadas no ambiente virtual de aprendizagem, com aulas gravadas, materiais de apoio e encontros ao vivo para debates e aprofundamento.</p>
+      <p class="curso-desc"><strong>A metodologia utiliza estratégias ativas</strong>, integrando momentos online e presenciais, com tutoria e acompanhamento individual. Os cursos contemplam um calendário modular que organiza aulas, práticas e avaliações.</p>
+      <p class="curso-desc" style="margin-bottom:28px;">Professores qualificados e tutores especializados oferecem suporte acadêmico e técnico contínuo, assegurando qualidade e credibilidade ao processo formativo.</p>
+
+      <div class="cbox">
+        <h3>🏢 Mercado de Trabalho</h3>
+        <p>O Curso de Graduação em Matemática forma profissionais qualificados e conscientes de sua participação nos processos de transformação da sociedade, com visão crítica, tornando-se atores históricos capazes de promover a interação entre o saber acadêmico e a sociedade.</p>
+        <ul class="dif-ul" style="margin-top:10px;">
+          <li>Atuando como professor do ensino médio e superior;</li>
+          <li>A depender da área de especialização, poderá também atuar no mercado financeiro como analista profissional;</li>
+          <li>Como pesquisador;</li>
+          <li>Na criação e organização de eventos científicos.</li>
+        </ul>
+      </div>
+
+      <div class="cbox">
+        <h3>⭐ Diferenciais Competitivos</h3>
+        <p>O Curso de Licenciatura em Matemática tem como objetivo formar um docente com total capacidade de envolver-se em qualquer área de aplicação da Matemática.</p>
+        <ul class="dif-ul" style="margin-top:10px;">
+          <li>Formar profissionais íntegros e comprometidos com a transformação da comunidade.</li>
+          <li>Capacitar o profissional para visão crítica e criativa da educação, interagindo com equipes inter e multidisciplinares.</li>
+          <li>Executar atividades de Matemática com habilidade, embasado no conhecimento científico.</li>
+          <li>Coordenar atividades educacionais, identificando demandas e propondo ações para melhoria do ensino.</li>
+          <li>Desenvolver e participar da realização de pesquisas no campo da Matemática.</li>
+          <li>Analisar criticamente a realidade da educação e seus determinantes, propondo ações de superação.</li>
+          <li>Articular a docência e a educação como relações inseparáveis no cotidiano de trabalho.</li>
+        </ul>
+      </div>
+
+      <div class="cbox">
+        <h3>📋 Matriz Curricular</h3>
+        <div class="mh"><span>Disciplina</span><span>Carga</span></div>
+        <div class="mr"><span>DIÁLOGOS INTERDISCIPLINARES NA FORMAÇÃO DOCENTE – COMPLEXIDADE E FORMAÇÃO</span><strong>10h</strong></div>
+        <div class="mr"><span>FORMAÇÃO SOCIOCULTURAL E SUSTENTÁVEL</span><strong>30h</strong></div>
+        <div class="mr"><span>PSICOLOGIA DA EDUCAÇÃO</span><strong>30h</strong></div>
+        <div class="mr"><span>INTRODUÇÃO AO CURSO DE MATEMÁTICA</span><strong>30h</strong></div>
+        <div class="mr"><span>DIÁLOGOS INTERDISCIPLINARES NA FORMAÇÃO DOCENTE – EPISTEMOLOGIA E PRÁXIS</span><strong>10h</strong></div>
+        <div class="mr"><span>CURRÍCULO E AVALIAÇÃO DE APRENDIZAGEM</span><strong>30h</strong></div>
+        <div class="mr"><span>FUNDAMENTOS HISTÓRICOS E FILOSÓFICOS DA EDUCAÇÃO</span><strong>30h</strong></div>
+        <div class="mr"><span>ESTÁGIO: PRÁTICAS DE OBSERVAÇÃO E AMBIENTAÇÃO EM CONTEXTOS EDUCACIONAIS – MATEMÁTICA</span><strong>25h</strong></div>
+        <div class="mr"><span>DIÁLOGOS INTERDISCIPLINARES – CURRÍCULO E METODOLOGIAS INTEGRADAS</span><strong>15h</strong></div>
+        <div class="mr"><span>POLÍTICAS PÚBLICAS DA EDUCAÇÃO BÁSICA</span><strong>30h</strong></div>
+        <div class="mr"><span>DIDÁTICA – ORGANIZAÇÃO DO TRABALHO PEDAGÓGICO</span><strong>30h</strong></div>
+        <div class="mr"><span>DIÁLOGOS INTERDISCIPLINARES – INOVAÇÃO E COLABORAÇÃO DOCENTE</span><strong>15h</strong></div>
+        <div class="mr"><span>PROCESSOS AVALIATIVOS</span><strong>30h</strong></div>
+        <div class="mr"><span>EDUCAÇÃO E TRABALHO</span><strong>30h</strong></div>
+        <div class="mr"><span>EIXOS INTEGRADOS DA PRÁTICA EDUCATIVA – 1</span><strong>10h</strong></div>
+        <div class="mr"><span>DIREITO EDUCACIONAL</span><strong>30h</strong></div>
+        <div class="mr"><span>SOCIOLOGIA GERAL</span><strong>30h</strong></div>
+        <div class="mr"><span>ESTÁGIO: PRÁTICAS DE OBSERVAÇÃO DIRIGIDA E APOIO À GESTÃO ESCOLAR – MATEMÁTICA</span><strong>25h</strong></div>
+        <div class="mr"><span>EIXOS INTEGRADOS DA PRÁTICA EDUCATIVA – 2</span><strong>10h</strong></div>
+        <div class="mr"><span>EDUCAÇÃO ESPECIAL E INCLUSIVA</span><strong>30h</strong></div>
+        <div class="mr"><span>PRODUÇÃO TEXTUAL</span><strong>30h</strong></div>
+        <div class="mr"><span>PRÁTICA INTEGRADORA – GAMIFICAÇÃO NO ENSINO – MATEMÁTICA</span><strong>145h</strong></div>
+        <div class="mr"><span>ACE – EDUCAÇÃO SUSTENTÁVEL</span><strong>50h</strong></div>
+        <div class="mr"><span>EIXOS INTEGRADOS DA PRÁTICA EDUCATIVA – 3</span><strong>15h</strong></div>
+        <div class="mr"><span>METODOLOGIA DA PESQUISA E DO TRABALHO CIENTÍFICO</span><strong>30h</strong></div>
+        <div class="mr"><span>ESTADO, POLÍTICA E ORGANIZAÇÃO DA EDUCAÇÃO</span><strong>30h</strong></div>
+        <div class="mr"><span>EIXOS INTEGRADOS DA PRÁTICA EDUCATIVA – 4</span><strong>15h</strong></div>
+        <div class="mr"><span>HISTÓRIA DA EDUCAÇÃO BRASILEIRA</span><strong>30h</strong></div>
+        <div class="mr"><span>FILOSOFIA GERAL</span><strong>30h</strong></div>
+        <div class="mr"><span>PRÁTICA INTEGRADORA – APRENDIZAGEM BASEADA EM PROJETOS (ABP) – MATEMÁTICA</span><strong>145h</strong></div>
+        <div class="mr"><span>ACE – EDUCAÇÃO INCLUSIVA</span><strong>50h</strong></div>
+        <div class="mr"><span>SABERES TRANSVERSAIS PARA A DOCÊNCIA – 1</span><strong>10h</strong></div>
+        <div class="mr"><span>CÁLCULO</span><strong>30h</strong></div>
+        <div class="mr"><span>MÉTODOS QUANTITATIVOS MATEMÁTICOS</span><strong>30h</strong></div>
+        <div class="mr"><span>LABORATÓRIO DE INOVAÇÃO DIGITAL E ENSINO HÍBRIDO</span><strong>40h</strong></div>
+        <div class="mr"><span>ESTÁGIO: PRÁTICAS DE INTERVENÇÃO ASSISTIDA – MATEMÁTICA</span><strong>25h</strong></div>
+        <div class="mr"><span>SABERES TRANSVERSAIS PARA A DOCÊNCIA – 2</span><strong>10h</strong></div>
+        <div class="mr"><span>FÍSICA: ESTÁTICA E CINEMÁTICA</span><strong>30h</strong></div>
+        <div class="mr"><span>FÍSICA: ELETROMAGNETISMO, ÓTICA E TERMODINÂMICA</span><strong>30h</strong></div>
+        <div class="mr"><span>PRÁTICA INTEGRADORA – ENSINO HÍBRIDO E METODOLOGIAS ATIVAS DIGITAIS – MATEMÁTICA</span><strong>145h</strong></div>
+        <div class="mr"><span>ACE – TECNOLOGIA E INOVAÇÃO EDUCACIONAL</span><strong>50h</strong></div>
+        <div class="mr"><span>SABERES TRANSVERSAIS PARA A DOCÊNCIA – 3</span><strong>10h</strong></div>
+        <div class="mr"><span>ESTATÍSTICA</span><strong>30h</strong></div>
+        <div class="mr"><span>CÁLCULO AVANÇADO</span><strong>30h</strong></div>
+        <div class="mr"><span>LABORATÓRIO DE POLÍTICAS EDUCACIONAIS E CONTEXTO ESCOLAR</span><strong>50h</strong></div>
+        <div class="mr"><span>SABERES TRANSVERSAIS PARA A DOCÊNCIA – 4</span><strong>10h</strong></div>
+        <div class="mr"><span>CÁLCULO NUMÉRICO</span><strong>30h</strong></div>
+        <div class="mr"><span>ANÁLISE NA RETA</span><strong>30h</strong></div>
+        <div class="mr"><span>PRÁTICA INTEGRADORA – APRENDIZAGEM COOPERATIVA E PORTFÓLIO – MATEMÁTICA</span><strong>145h</strong></div>
+        <div class="mr"><span>ACE – CIDADANIA E DIVERSIDADE</span><strong>50h</strong></div>
+        <div class="mr"><span>EDUCAÇÃO EM PERSPECTIVA: TEORIA E ATUALIDADE – 1</span><strong>10h</strong></div>
+        <div class="mr"><span>TRABALHO DE CONCLUSÃO DE CURSO – MATEMÁTICA</span><strong>40h</strong></div>
+        <div class="mr"><span>GEOMETRIA EUCLIDIANA</span><strong>30h</strong></div>
+        <div class="mr"><span>METODOLOGIA DO ENSINO DE MATEMÁTICA</span><strong>30h</strong></div>
+        <div class="mr"><span>LABORATÓRIO DE LIBRAS: COMUNICAÇÃO INCLUSIVA</span><strong>40h</strong></div>
+        <div class="mr"><span>ESTÁGIO: PRÁTICAS DE REGÊNCIA, GESTÃO E PESQUISA – MATEMÁTICA</span><strong>325h</strong></div>
+        <div class="mr"><span>EDUCAÇÃO EM PERSPECTIVA: TEORIA E ATUALIDADE – 2</span><strong>10h</strong></div>
+        <div class="mr"><span>DIFICULDADES NO PROCESSO DE APRENDIZAGEM DA LINGUAGEM MATEMÁTICA</span><strong>30h</strong></div>
+        <div class="mr"><span>FUNDAMENTOS TEÓRICOS E METODOLÓGICOS DO ENSINO DA MATEMÁTICA</span><strong>30h</strong></div>
+        <div class="mr"><span>PRÁTICA INTEGRADORA – SALA DE AULA INVERTIDA – MATEMÁTICA</span><strong>145h</strong></div>
+        <div class="mr"><span>ACE – CULTURA E DIVERSIDADE</span><strong>60h</strong></div>
+        <div class="mr"><span>EDUCAÇÃO EM PERSPECTIVA: TEORIA E ATUALIDADE – 3</span><strong>10h</strong></div>
+        <div class="mr"><span>ÁLGEBRA</span><strong>30h</strong></div>
+        <div class="mr"><span>MÉTODOS MATEMÁTICOS APLICADOS A FÍSICA</span><strong>30h</strong></div>
+        <div class="mr"><span>LABORATÓRIO DE RETÓRICA, ORATÓRIA E COMUNICAÇÃO EFICAZ</span><strong>40h</strong></div>
+        <div class="mr"><span>EDUCAÇÃO EM PERSPECTIVA: TEORIA E ATUALIDADE – 4</span><strong>10h</strong></div>
+        <div class="mr"><span>GEOMETRIA ANALÍTICA E ÁLGEBRA LINEAR E VETORIAL</span><strong>30h</strong></div>
+        <div class="mr"><span>VARIÁVEIS COMPLEXAS</span><strong>30h</strong></div>
+        <div class="mr"><span>PRÁTICA INTEGRADORA – RETÓRICA E ORATÓRIA – MATEMÁTICA</span><strong>155h</strong></div>
+        <div class="mr"><span>ACE – VOLUNTARIADO SOCIAL</span><strong>60h</strong></div>
+        <div class="mr"><span>ATIVIDADES ACADÊMICAS COMPLEMENTARES</span><strong>220h</strong></div>
+        <p class="mn">"A matriz curricular pode ser alterada a qualquer momento para atender a atualizações acadêmicas ou exigências legais."</p>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="scard">
+        <h3>Informações do Curso</h3>
+        <div class="ir"><span class="ir-ico">🎓</span><div><p>Habilitação</p><strong>Licenciatura</strong></div></div>
+        <div class="ir"><span class="ir-ico">⭐</span><div><p>Modalidade</p><strong>Graduação EAD</strong></div></div>
+        <div class="ir"><span class="ir-ico">📅</span><div><p>Duração</p><strong>4 Anos</strong></div></div>
+        <div class="pb">
+          <p class="po">De R$ 330,00</p>
+          <p class="pn">R$ 112,20</p>
+          <p class="pp">/ mês</p>
+        </div>
+        <button class="btn-mat" onclick="showPage('matricula','mat')">Fazer matrícula ✓</button>
+        <button class="btn-inf" onclick="window.open('https://wa.me/5513991568811?text=Ol%C3%A1!%20Quero%20informa%C3%A7%C3%B5es%20sobre%20Matem%C3%A1tica%20Licenciatura.','_blank')">Quero Mais Informações</button>
+      </div>
+      <div class="scard oc">
+        <h4>Outros cursos</h4>
+        <button class="ocl" onclick="showPage('ef')">Educação Física <span>Licenciatura</span></button>
+        <button class="ocl" onclick="showPage('home');scrollTo('sec-contato')">Administração <span>EAD</span></button>
+        <button class="ocl" onclick="showPage('home');scrollTo('sec-contato')">ADS <span>EAD</span></button>
+        <button class="ocl" onclick="showPage('home');scrollTo('sec-contato')">Engenharia <span>EAD</span></button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-mat -->
+
+
+
+<div id="page-artes" class="page">
+  <div class="curso-hero-banner">
+    <div class="chb-bg" style="background:linear-gradient(135deg,#7c2d12,#ea580c)"></div>
+    <div class="chb-overlay"></div>
+    <div class="chb-content">
+      <div class="breadcrumb">
+        <a onclick="showPage('home')">Início</a><span>›</span>
+        <a onclick="showPage('cursos')">Cursos</a><span>›</span>
+        <span style="color:#fff">Artes</span>
+      </div>
+      <div class="chb-badge">Graduação EAD</div>
+      <h1>Artes<br>Licenciatura</h1>
+      <p>Formação criativa e moderna para futuros professores e profissionais das artes.</p>
+    </div>
+  </div>
+
+  <div class="curso-body">
+    <div>
+      <div class="curso-img-wrap" style="background:linear-gradient(135deg,#7c2d12,#ea580c)">🎨</div>
+
+      <div class="cbox">
+        <h3>🏢 Mercado de Trabalho</h3>
+        <p>O professor de artes visuais pode atuar na educação infantil, ensino fundamental, ensino médio, ensino superior e coordenação de artes.</p>
+      </div>
+
+      <div class="cbox">
+        <h3>⭐ Diferenciais Competitivos</h3>
+        <ul class="dif-ul">
+          <li>Formação criativa e inovadora para atuação docente.</li>
+          <li>Metodologias modernas de ensino das artes.</li>
+          <li>Integração entre teoria, prática e cultura.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="scard">
+        <h3>Informações do Curso</h3>
+        <div class="ir"><span class="ir-ico">🎓</span><div><p>Habilitação</p><strong>Licenciatura</strong></div></div>
+        <div class="ir"><span class="ir-ico">⭐</span><div><p>Modalidade</p><strong>Graduação EAD</strong></div></div>
+        <div class="ir"><span class="ir-ico">📅</span><div><p>Duração</p><strong>4 Anos</strong></div></div>
+        <div class="pb">
+          <p class="po">De R$ 330,00</p>
+          <p class="pn">R$ 112,20</p>
+          <p class="pp">/ mês</p>
+        </div>
+        <button class="btn-mat" onclick="showPage('matricula','artes')">Fazer matrícula ✓</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="page-biomed" class="page">
+  <div class="curso-hero-banner">
+    <div class="chb-bg" style="background:linear-gradient(135deg,#0f766e,#14b8a6)"></div>
+    <div class="chb-overlay"></div>
+    <div class="chb-content">
+      <div class="breadcrumb">
+        <a onclick="showPage('home')">Início</a><span>›</span>
+        <a onclick="showPage('cursos')">Cursos</a><span>›</span>
+        <span style="color:#fff">Biomedicina</span>
+      </div>
+      <div class="chb-badge">Graduação EAD</div>
+      <h1>Biomedicina<br>Bacharelado</h1>
+      <p>Formação completa na área da saúde com foco em análises clínicas e pesquisa.</p>
+    </div>
+  </div>
+
+  <div class="curso-body">
+    <div>
+      <div class="curso-img-wrap" style="background:linear-gradient(135deg,#0f766e,#14b8a6)">🧬</div>
+
+      <div class="cbox">
+        <h3>🏢 Mercado de Trabalho</h3>
+        <p>O biomédico pode atuar em análises clínicas, genética, microbiologia, imunologia, hematologia, saúde pública e laboratórios especializados.</p>
+      </div>
+
+      <div class="cbox">
+        <h3>⭐ Diferenciais Competitivos</h3>
+        <ul class="dif-ul">
+          <li>Aulas práticas e estágios supervisionados.</li>
+          <li>Formação voltada para prevenção, pesquisa e diagnóstico.</li>
+          <li>Corpo docente qualificado e suporte acadêmico contínuo.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="scard">
+        <h3>Informações do Curso</h3>
+        <div class="ir"><span class="ir-ico">🎓</span><div><p>Habilitação</p><strong>Bacharelado</strong></div></div>
+        <div class="ir"><span class="ir-ico">⭐</span><div><p>Modalidade</p><strong>Graduação EAD</strong></div></div>
+        <div class="ir"><span class="ir-ico">📅</span><div><p>Duração</p><strong>4 Anos</strong></div></div>
+        <div class="pb">
+          <p class="po">De R$ 859,00</p>
+          <p class="pn">R$ 292,06</p>
+          <p class="pp">/ mês</p>
+        </div>
+        <button class="btn-mat" onclick="showPage('matricula','biomed')">Fazer matrícula ✓</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE: MATRÍCULA
+════════════════════════════════════════════ -->
+<div id="page-matricula" class="page">
+
+  <div class="mat-banner">
+    <div class="badge">✅ Matrícula Online</div>
+    <h1>Faça sua matrícula agora</h1>
+    <p>Entre em contato pelo WhatsApp e nossa equipe vai te guiar em cada passo do processo de matrícula.</p>
+  </div>
+
+  <div class="mat-strip">
+    <div class="mat-strip-inner" id="mat-curso-info">
+      <div class="msi"><span>Curso</span><strong id="mat-nome">—</strong></div>
+      <div class="msi"><span>Modalidade</span><strong>Graduação EAD</strong></div>
+      <div class="msi"><span>Duração</span><strong>4 anos</strong></div>
+      <div class="msi-price">
+        <div class="po">R$ 330,00</div>
+        <div class="pn">R$ 112,20</div>
+        <div class="pp">por mês</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mat-body">
+
+    <div class="steps-title">Como funciona</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body"><h4>Envie uma mensagem no WhatsApp</h4><p>Entre em contato com nossa equipe pelo número abaixo. Use a mensagem pré-formatada para agilizar.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body"><h4>Informe seus dados e o curso desejado</h4><p>Nossa equipe vai solicitar seus dados pessoais e documentos necessários para efetuar a matrícula.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body"><h4>Conclua a matrícula</h4><p>Assine o contrato digitalmente e acesse a plataforma. Pronto — você já é aluno UniFatecie!</p></div>
+      </div>
+    </div>
+
+    
+<div class="contato-title">Escolha como deseja fazer sua matrícula</div>
+
+<div class="mat-opcoes">
+
+  <div class="opcao-card whatsapp-card">
+    <div class="opcao-icon">💬</div>
+    <h3>Falar no WhatsApp</h3>
+    <p>Atendimento rápido com nossa equipe para realizar sua matrícula.</p>
+
+    <a 
+      id="wa-mat-link"
+      href="https://wa.me/5513991568811?text=Olá! Gostaria de realizar minha matrícula."
+      target="_blank"
+      class="btn-opcao-wa"
+    >
+      Chamar no WhatsApp
+    </a>
+  </div>
+
+  <div class="opcao-card form-card-matricula">
+    <div class="opcao-icon">📝</div>
+    <h3>Enviar dados para matrícula</h3>
+    <p>Preencha os dados abaixo e o supervisor entrará em contato.</p>
+
+    <form id="formMatricula">
+
+      <input type="text" placeholder="Nome completo" required>
+
+      <input type="number" placeholder="Idade" required>
+
+      <input type="text" placeholder="CEP" required>
+
+      <input type="text" placeholder="CPF" required>
+
+      <input type="text" placeholder="Qual curso deseja?" required>
+
+      <input type="tel" placeholder="Telefone" required>
+
+      <input type="email" placeholder="E-mail" required>
+
+      <button type="submit" class="btn-enviar-form">
+        Enviar Dados
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+<div class="aviso">
+
+      <span style="font-size:1.1rem;margin-top:1px">💡</span>
+      <span>Fora do horário de atendimento presencial você pode enviar mensagem a qualquer momento pelo WhatsApp. Nossa equipe retornará assim que possível.</span>
+    </div>
+
+  </div>
+
+</div><!-- /page-matricula -->
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER + FLOAT
+════════════════════════════════════════════ -->
+<footer>© 2026 UniFatecie Polo Mongaguá — Todos os direitos reservados.</footer>
+<a href="https://wa.me/5513991568811" target="_blank" class="wa-float">💬 WhatsApp</a>
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  // Mapa de cursos para a página de matrícula
+  const CURSOS = {
+    ef:  { nome: 'Educação Física – Licenciatura', msg: 'Olá! Gostaria de realizar minha matrícula no curso de Educação Física – Licenciatura EAD. Poderia me ajudar?' },
+    mat: { nome: 'Matemática – Licenciatura',       msg: 'Olá! Gostaria de realizar minha matrícula no curso de Matemática – Licenciatura EAD. Poderia me ajudar?' },
+    artes: { nome: 'Artes – Licenciatura',       msg: 'Olá! Gostaria de realizar minha matrícula no curso de Artes – Licenciatura EAD. Poderia me ajudar?' },
+    biomed: { nome: 'Biomedicina – Bacharelado',       msg: 'Olá! Gostaria de realizar minha matrícula no curso de Biomedicina – Bacharelado EAD. Poderia me ajudar?' },
+  };
+
+  function showPage(id, cursoKey) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const pg = document.getElementById('page-' + id);
+    if (pg) pg.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Atualiza dados da matrícula conforme curso
+    if (id === 'matricula' && cursoKey && CURSOS[cursoKey]) {
+      const c = CURSOS[cursoKey];
+      document.getElementById('mat-nome').textContent = c.nome;
+      document.getElementById('msgPreview').textContent = c.msg;
+      const enc = encodeURIComponent(c.msg);
+      document.getElementById('wa-mat-link').href = 'https://wa.me/5513991568811?text=' + enc;
+      document.getElementById('btn-send-wa').onclick = () => window.open('https://wa.me/5513991568811?text=' + enc, '_blank');
+    }
+  }
+
+  function scrollTo(id) {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
+  }
+
+  function copiarMsg() {
+    const txt = document.getElementById('msgPreview').innerText.trim();
+    navigator.clipboard.writeText(txt).then(() => {
+      const ok = document.getElementById('copyOk');
+      ok.style.display = 'block';
+      setTimeout(() => ok.style.display = 'none', 2500);
+    });
+  }
+</script>
+
+<script>
+document.getElementById("formMatricula")?.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  alert("Dados enviados com sucesso! Nosso supervisor entrará em contato.");
+
+  this.reset();
+});
+</script>
+
+</body>
+</html>
